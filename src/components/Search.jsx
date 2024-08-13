@@ -1,6 +1,6 @@
 const Search = () => {
   return (
-    <div className=" md:w-96">
+    <div className="w-[100%] max-w-96 px-4">
       <div className="relative flex w-full flex-wrap items-stretch">
         <input
           type="search"

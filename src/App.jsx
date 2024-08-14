@@ -7,9 +7,11 @@ const App = () => {
   return (
     <>
       <GlobalProvider>
-        <Header />
-        <Home />
-        <Footer />
+        <>
+          <Header />
+          <Home />
+          <Footer />
+        </>
       </GlobalProvider>
     </>
   );

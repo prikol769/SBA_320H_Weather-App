@@ -7,14 +7,10 @@ import { useGlobalContext } from "../context/weatherContext";
 
 const Home = () => {
   const { searchInput, temperatureUnit, setSearchInput } = useGlobalContext();
-  console.log(searchInput, "searchInput");
 
   const [weathers, setWeathers] = useState([]);
   const [cityCoordinates, setCityCoordinates] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  console.log(weathers, "weathersState");
-  console.log(cityCoordinates, "cityCoordinates");
 
   useEffect(() => {
     const success = async (position) => {
@@ -51,7 +47,6 @@ const Home = () => {
         const cityCoordinatesFetch = await getCoordinatesByLocation(
           searchInput
         );
-        console.log(cityCoordinatesFetch[0], "cityCoordinatesFetch");
         setCityCoordinates({
           ...cityCoordinatesFetch[0],
         });
@@ -78,7 +73,6 @@ const Home = () => {
         const groupedByDay = groupByDayLocal(weathersData.list);
 
         setWeathers(groupedByDay);
-        console.log(weathersData, "weathersData");
         setLoading(false);
       };
       getWeathersDataFetch();

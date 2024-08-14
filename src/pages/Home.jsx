@@ -6,7 +6,7 @@ import { groupByDayLocal } from "../utils/DateUtils";
 import { useGlobalContext } from "../context/weatherContext";
 
 const Home = () => {
-  const { searchInput } = useGlobalContext();
+  const { searchInput, temperatureUnit } = useGlobalContext();
   console.log(searchInput, "searchInput");
 
   const [weathers, setWeathers] = useState([]);
@@ -43,7 +43,8 @@ const Home = () => {
         setLoading(true);
         const weathersData = await getWeather(
           cityCoordinates.lat,
-          cityCoordinates.lon
+          cityCoordinates.lon,
+          temperatureUnit
         );
 
         const groupedByDay = groupByDayLocal(weathersData.list);
@@ -54,7 +55,7 @@ const Home = () => {
       };
       getWeathersDataFetch();
     }
-  }, [cityCoordinates]);
+  }, [cityCoordinates, temperatureUnit]);
 
   if (!searchInput)
     return (
@@ -63,7 +64,7 @@ const Home = () => {
       </p>
     );
 
-  if (weathers.length <= 0 && searchInput)
+  if (weathers.length <= 0 && searchInput && !loading)
     return (
       <p className="text-3xl font-semibold min-h-[calc(100vh-126px)] flex justify-center items-center">
         Sorry can't find {searchInput}

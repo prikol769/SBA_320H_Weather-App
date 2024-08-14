@@ -5,7 +5,7 @@ const API_KEY = import.meta.env.VITE_API_KEY;
 export const getCoordinatesByLocation = async (location) => {
   try {
     const { data: response } = await axios.get(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=${API_KEY}`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=${API_KEY}`
     );
 
     return response;
@@ -17,7 +17,7 @@ export const getCoordinatesByLocation = async (location) => {
 export const getWeather = async (lat, lon, temperatureUnit) => {
   try {
     const { data: response } = await axios.get(
-      `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${temperatureUnit}&appid=${API_KEY}`
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${temperatureUnit}&appid=${API_KEY}`
     );
 
     return response;

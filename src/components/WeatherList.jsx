@@ -2,8 +2,6 @@ import { formatTimestampToReadableDate } from "../utils/DateUtils";
 import WeatherItem from "./WeatherItem";
 
 const WeatherList = ({ dailyWeather }) => {
-  console.log(dailyWeather, "dailyWeather");
-
   return (
     <div>
       <div className="py-4 border-y border-[#dedede]">

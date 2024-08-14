@@ -6,7 +6,7 @@ import { groupByDayLocal } from "../utils/DateUtils";
 import { useGlobalContext } from "../context/weatherContext";
 
 const Home = () => {
-  const { searchInput, temperatureUnit } = useGlobalContext();
+  const { searchInput, temperatureUnit, setSearchInput } = useGlobalContext();
   console.log(searchInput, "searchInput");
 
   const [weathers, setWeathers] = useState([]);
@@ -15,6 +15,34 @@ const Home = () => {
 
   console.log(weathers, "weathersState");
   console.log(cityCoordinates, "cityCoordinates");
+
+  useEffect(() => {
+    const success = async (position) => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      const weathersData = await getWeather(
+        latitude,
+        longitude,
+        temperatureUnit
+      );
+
+      const groupedByDay = groupByDayLocal(weathersData.list);
+
+      setWeathers(groupedByDay);
+      setSearchInput(weathersData.city.name);
+    };
+
+    function error() {
+      console.log("Unable to retrieve your location");
+    }
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success, error);
+    } else {
+      console.log("Geolocation not supported");
+    }
+  }, []);
 
   useEffect(() => {
     if (searchInput) {

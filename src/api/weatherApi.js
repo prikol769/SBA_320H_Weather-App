@@ -14,10 +14,10 @@ export const getCoordinatesByLocation = async (location) => {
   }
 };
 
-export const getWeather = async (lat, lon) => {
+export const getWeather = async (lat, lon, temperatureUnit) => {
   try {
     const { data: response } = await axios.get(
-      `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${API_KEY}`
+      `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${temperatureUnit}&appid=${API_KEY}`
     );
 
     return response;

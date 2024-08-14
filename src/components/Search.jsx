@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalContext } from "../context/weatherContext";
 
 const Search = () => {
   const [search, setSearch] = useState("");
-  const { setSearchInput } = useGlobalContext();
+  const { setSearchInput, searchInput } = useGlobalContext();
 
   const searchHandle = () => {
     setSearchInput(search);
   };
+
+  useEffect(() => {
+    if (searchInput && !search) {
+      setSearch(searchInput);
+    }
+  }, [searchInput]);
 
   return (
     <div className="w-[100%] max-w-96 px-4">

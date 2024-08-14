@@ -1,10 +1,17 @@
 import { useState } from "react";
+import { useGlobalContext } from "../context/weatherContext";
 
 const Switcher = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const { setTemperatureUnit } = useGlobalContext();
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
+    if (isChecked) {
+      setTemperatureUnit("imperial");
+    } else {
+      setTemperatureUnit("metric");
+    }
   };
 
   return (

@@ -3,6 +3,8 @@ import { createContext, useContext, useState } from "react";
 export const WeatherContext = createContext({
   searchInput: "",
   setSearchInput: () => {},
+  temperatureUnit: "imperial",
+  setTemperatureUnit: () => {},
 });
 
 export function useGlobalContext() {
@@ -11,10 +13,13 @@ export function useGlobalContext() {
 
 const useProvideGlobal = () => {
   const [searchInput, setSearchInput] = useState("");
+  const [temperatureUnit, setTemperatureUnit] = useState("imperial");
 
   return {
     searchInput,
     setSearchInput,
+    temperatureUnit,
+    setTemperatureUnit,
   };
 };
 

@@ -1,14 +1,20 @@
+import { useState } from "react";
 import { useGlobalContext } from "../context/weatherContext";
 
 const Search = () => {
-  const { setSearchInput, searchInput } = useGlobalContext();
+  const [search, setSearch] = useState("");
+  const { setSearchInput } = useGlobalContext();
+
+  const searchHandle = () => {
+    setSearchInput(search);
+  };
 
   return (
     <div className="w-[100%] max-w-96 px-4">
       <div className="relative flex w-full flex-wrap items-stretch">
         <input
-          onChange={(e) => setSearchInput(e.target.value)}
-          value={searchInput}
+          onChange={(e) => setSearch(e.target.value)}
+          value={search}
           type="search"
           className="text-white relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] font-normal leading-[1.6] text-white-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-white focus:text-white-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600  dark:placeholder:text-white-200 dark:focus:border-primary"
           placeholder="Search City or Zip Code"
@@ -17,6 +23,7 @@ const Search = () => {
         />
 
         <button
+          onClick={searchHandle}
           className="relative z-[2] flex items-center rounded-r bg-white px-6 py-2.5 text-xs font-medium uppercase leading-tight text-primary shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
           type="button"
           id="button-addon1"

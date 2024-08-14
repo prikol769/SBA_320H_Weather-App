@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_KEY = "91c3e8167a6820344378e26b2e631bad";
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 export const getCoordinatesByLocation = async (location) => {
   try {

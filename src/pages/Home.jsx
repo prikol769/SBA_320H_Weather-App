@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { getCoordinatesByLocation, getWeather } from "../api/weatherApi";
 import WeatherList from "../components/WeatherList";
-import Spinner from "../components/spinner";
+import Spinner from "../components/Spinner";
 import { groupByDayLocal } from "../utils/DateUtils";
-import { useGlobalContext } from "../context/weatherContext";
+import { useGlobalContext } from "../context/WeatherContext";
 
 const Home = () => {
   const { searchInput, temperatureUnit, setSearchInput } = useGlobalContext();

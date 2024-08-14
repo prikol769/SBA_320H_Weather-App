@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useGlobalContext } from "../context/weatherContext";
+import { useGlobalContext } from "../context/WeatherContext";
 
 const Search = () => {
   const [search, setSearch] = useState("");

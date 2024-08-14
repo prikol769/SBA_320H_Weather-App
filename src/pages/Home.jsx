@@ -3,8 +3,12 @@ import { getCoordinatesByLocation, getWeather } from "../api/weatherApi";
 import WeatherList from "../components/WeatherList";
 import Spinner from "../components/spinner";
 import { groupByDayLocal } from "../utils/DateUtils";
+import { useGlobalContext } from "../context/weatherContext";
 
 const Home = () => {
+  const { searchInput } = useGlobalContext();
+  console.log(searchInput, "searchInput");
+
   const [weathers, setWeathers] = useState([]);
   const [cityCoordinates, setCityCoordinates] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,16 +17,25 @@ const Home = () => {
   console.log(cityCoordinates, "cityCoordinates");
 
   useEffect(() => {
-    const getCoordinatesByLocationFetch = async () => {
-      setLoading(true);
-      const cityCoordinatesFetch = await getCoordinatesByLocation("Fort Worth");
-      console.log(cityCoordinatesFetch[0], "cityCoordinatesFetch");
-      setCityCoordinates({
-        ...cityCoordinatesFetch[0],
-      });
-    };
-    getCoordinatesByLocationFetch();
-  }, []);
+    if (searchInput) {
+      const getCoordinatesByLocationFetch = async () => {
+        setLoading(true);
+        const cityCoordinatesFetch = await getCoordinatesByLocation(
+          searchInput
+        );
+        console.log(cityCoordinatesFetch[0], "cityCoordinatesFetch");
+        setCityCoordinates({
+          ...cityCoordinatesFetch[0],
+        });
+        if (cityCoordinatesFetch.length <= 0) {
+          setLoading(false);
+          setWeathers([]);
+        }
+      };
+
+      getCoordinatesByLocationFetch();
+    }
+  }, [searchInput]);
 
   useEffect(() => {
     if (cityCoordinates.lat && cityCoordinates.lon) {
@@ -42,6 +55,20 @@ const Home = () => {
       getWeathersDataFetch();
     }
   }, [cityCoordinates]);
+
+  if (!searchInput)
+    return (
+      <p className="text-3xl font-semibold min-h-[calc(100vh-126px)] flex justify-center items-center">
+        Please search for the weather forecast by entering a city or zip code
+      </p>
+    );
+
+  if (weathers.length <= 0 && searchInput)
+    return (
+      <p className="text-3xl font-semibold min-h-[calc(100vh-126px)] flex justify-center items-center">
+        Sorry can't find {searchInput}
+      </p>
+    );
 
   return (
     <div className="min-h-[calc(100vh-126px)] p-6 max-w-[1400px] mx-auto">

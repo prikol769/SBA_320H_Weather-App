@@ -1,4 +1,4 @@
-import { useGlobalContext } from "../context/WeatherContext";
+import { useGlobalContext } from "../context/GlobalContext";
 import { formatUnixTimestampTo12Hour } from "../utils/DateUtils";
 
 const WeatherItem = ({ hourlyWeather }) => {

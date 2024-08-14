@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-export const WeatherContext = createContext({
+export const GlobalContext = createContext({
   searchInput: "",
   setSearchInput: () => {},
   temperatureUnit: "imperial",
@@ -8,7 +8,7 @@ export const WeatherContext = createContext({
 });
 
 export function useGlobalContext() {
-  return useContext(WeatherContext);
+  return useContext(GlobalContext);
 }
 
 const useProvideGlobal = () => {
@@ -26,8 +26,8 @@ const useProvideGlobal = () => {
 export const GlobalProvider = ({ children }) => {
   const globalData = useProvideGlobal();
   return (
-    <WeatherContext.Provider value={globalData}>
+    <GlobalContext.Provider value={globalData}>
       {children}
-    </WeatherContext.Provider>
+    </GlobalContext.Provider>
   );
 };

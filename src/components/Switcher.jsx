@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useGlobalContext } from "../context/WeatherContext";
+import { useGlobalContext } from "../context/GlobalContext";
 
 const Switcher = () => {
   const [isChecked, setIsChecked] = useState(false);

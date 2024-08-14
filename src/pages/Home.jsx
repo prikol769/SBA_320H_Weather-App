@@ -3,7 +3,7 @@ import { getCoordinatesByLocation, getWeather } from "../api/weatherApi";
 import WeatherList from "../components/WeatherList";
 import Spinner from "../components/Spinner";
 import { groupByDayLocal } from "../utils/DateUtils";
-import { useGlobalContext } from "../context/WeatherContext";
+import { useGlobalContext } from "../context/GlobalContext";
 
 const Home = () => {
   const { searchInput, temperatureUnit, setSearchInput } = useGlobalContext();
